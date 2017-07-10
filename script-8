@@ -1,4 +1,5 @@
 #!/bin/sh
+#validation
 if [ $# -ne 2 ]
  then
   echo "this script requires 2 inputs, numbers > 0"
@@ -29,5 +30,35 @@ if [ $1 -gt $2 ]
   largest=$2
 fi
 
-echo largest is $largest
-echo smallest is $smallest
+div=$smallest
+
+#GCD Loop
+while [ $largest -ne 0 ]
+ do
+  x=`expr $1 % $div`
+  y=`expr $2 % $div`
+  if [ $x -eq 0 -a $y -eq 0 ]
+   then
+    echo GDC is $div
+    break
+  fi
+ div=`expr $div - 1`
+ done
+
+#LCM Loop
+found=0
+a=$1
+b=$2
+while [ $found -eq 0 ]
+ do
+  if [ $a -eq $b ]
+   then
+   echo LCM is $a
+   found=1
+  elif [ $a -gt $b ]
+   then
+    b=`expr $b + $2`
+  else
+   a=`expr $a + $1`
+  fi
+ done
